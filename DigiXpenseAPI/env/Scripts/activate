@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="D:\Code\DigiXpenseAPI\env"
+VIRTUAL_ENV="D:\DigiXpenseAPI\DigiXpenseAPI\env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

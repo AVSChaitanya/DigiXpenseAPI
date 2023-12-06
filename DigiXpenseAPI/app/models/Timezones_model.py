@@ -19,3 +19,4 @@ class PublicSTPTimezones(Base):
     TimezoneName = mapped_column(String(80))
     TimezoneCode = mapped_column(String(120))
     IsActive = mapped_column(Boolean, server_default=text('true'))
+

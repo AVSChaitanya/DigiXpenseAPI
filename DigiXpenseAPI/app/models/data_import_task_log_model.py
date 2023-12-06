@@ -515,6 +515,7 @@ class PublicSYSDataImportTaskLog(Base):
     TaskId = mapped_column(String(20), server_default=text("('TI-'::text || (nextval('importtask_id_seq'::regclass))::text)"))
     FileName = mapped_column(String(220))
     ImportDate = mapped_column(Date)
+    FailureReason = mapped_column(Text)
     FunctionalEntity = mapped_column(Enum('ExpenseRegistration', 'CashAdvance', 'Requisition', 'TravelRequisition', name='functionalentity'))
     StartDatetime = mapped_column(DateTime)
     EndDatetime = mapped_column(DateTime)

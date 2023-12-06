@@ -539,7 +539,8 @@ class PublicSYSFunctionalEntities(Base):
     public_SYSUsers_: Mapped[Optional['PublicSYSUsers']] = relationship('PublicSYSUsers', foreign_keys=[ModifiedBy], back_populates='public_SYSFunctionalEntities_')
     public_STPOrganization: Mapped[Optional['PublicSTPOrganization']] = relationship('PublicSTPOrganization', foreign_keys=[OrganizationId], back_populates='public_SYSFunctionalEntities')
     public_STPOrganization_: Mapped[Optional['PublicSTPOrganization']] = relationship('PublicSTPOrganization', foreign_keys=[SubOrganizationId], back_populates='public_SYSFunctionalEntities_')
-    public_SYSRolePrivileges: Mapped[List['PublicSYSRolePrivileges']] = relationship('PublicSYSRolePrivileges', uselist=True, back_populates='public_SYSFunctionalEntities')
+    public_SYSRolePrivileges: Mapped[List['PublicSYSRolePrivileges']] = relationship('PublicSYSRolePrivileges', uselist=True, foreign_keys='[PublicSYSRolePrivileges.FunctionalEntityId]', back_populates='public_SYSFunctionalEntities')
+    public_SYSRolePrivileges_: Mapped[List['PublicSYSRolePrivileges']] = relationship('PublicSYSRolePrivileges', uselist=True, foreign_keys='[PublicSYSRolePrivileges.FunctionalEntityName]', back_populates='public_SYSFunctionalEntities_')
 
 
 class PublicSYSRoles(Base):
@@ -584,6 +585,7 @@ class PublicSYSRolePrivileges(Base):
     __table_args__ = (
         ForeignKeyConstraint(['CreatedBy'], ['public.SYSUsers.UserId'], name='SYSRolePrivileges_fk2'),
         ForeignKeyConstraint(['FunctionalEntityId'], ['public.SYSFunctionalEntities.FunctionalEntityId'], name='SYSRolePrivileges_fk1'),
+        ForeignKeyConstraint(['FunctionalEntityName'], ['public.SYSFunctionalEntities.FunctionalEntityName'], name='SYSRolePrivileges_fk6'),
         ForeignKeyConstraint(['ModifiedBy'], ['public.SYSUsers.UserId'], name='SYSRolePrivileges_fk3'),
         ForeignKeyConstraint(['OrganizationId'], ['public.STPOrganization.OrganizationId'], name='SYSRolePrivileges_fk4'),
         ForeignKeyConstraint(['RoleId'], ['public.SYSRoles.RoleId'], name='SYSRolePrivileges_fk0'),
@@ -609,9 +611,11 @@ class PublicSYSRolePrivileges(Base):
     IsActive = mapped_column(Boolean, server_default=text('true'))
     OrganizationId = mapped_column(Integer)
     SubOrganizationId = mapped_column(Integer)
+    FunctionalEntityName = mapped_column(String(30))
 
     public_SYSUsers: Mapped[Optional['PublicSYSUsers']] = relationship('PublicSYSUsers', foreign_keys=[CreatedBy], back_populates='public_SYSRolePrivileges')
-    public_SYSFunctionalEntities: Mapped[Optional['PublicSYSFunctionalEntities']] = relationship('PublicSYSFunctionalEntities', back_populates='public_SYSRolePrivileges')
+    public_SYSFunctionalEntities: Mapped[Optional['PublicSYSFunctionalEntities']] = relationship('PublicSYSFunctionalEntities', foreign_keys=[FunctionalEntityId], back_populates='public_SYSRolePrivileges')
+    public_SYSFunctionalEntities_: Mapped[Optional['PublicSYSFunctionalEntities']] = relationship('PublicSYSFunctionalEntities', foreign_keys=[FunctionalEntityName], back_populates='public_SYSRolePrivileges_')
     public_SYSUsers_: Mapped[Optional['PublicSYSUsers']] = relationship('PublicSYSUsers', foreign_keys=[ModifiedBy], back_populates='public_SYSRolePrivileges_')
     public_STPOrganization: Mapped[Optional['PublicSTPOrganization']] = relationship('PublicSTPOrganization', foreign_keys=[OrganizationId], back_populates='public_SYSRolePrivileges')
     public_SYSRoles: Mapped[Optional['PublicSYSRoles']] = relationship('PublicSYSRoles', back_populates='public_SYSRolePrivileges')

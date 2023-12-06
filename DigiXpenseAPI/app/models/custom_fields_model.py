@@ -3,6 +3,7 @@ from typing import List, Optional
 from sqlalchemy import Boolean, Column, Date, DateTime, Enum, ForeignKeyConstraint, Index, Integer, Numeric, PrimaryKeyConstraint, Sequence, String, Text, UniqueConstraint, text
 from sqlalchemy.orm import Mapped, declarative_base, mapped_column, relationship
 from sqlalchemy.orm.base import Mapped
+from sqlalchemy_to_pydantic import sqlalchemy_to_pydantic
 
 Base = declarative_base()
 
@@ -533,3 +534,6 @@ class PublicSTPCustomFields(Base):
     public_SYSUsers_: Mapped[Optional['PublicSYSUsers']] = relationship('PublicSYSUsers', foreign_keys=[ModifiedBy], back_populates='public_STPCustomFields_')
     public_STPOrganization: Mapped['PublicSTPOrganization'] = relationship('PublicSTPOrganization', foreign_keys=[OrganizationId], back_populates='public_STPCustomFields')
     public_STPOrganization_: Mapped[Optional['PublicSTPOrganization']] = relationship('PublicSTPOrganization', foreign_keys=[SubOrganizationId], back_populates='public_STPCustomFields_')
+
+CustomFields_Pydantic = sqlalchemy_to_pydantic(PublicSTPCustomFields)
+print(CustomFields_Pydantic.__annotations__)

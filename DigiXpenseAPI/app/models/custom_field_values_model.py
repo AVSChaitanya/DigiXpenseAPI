@@ -1,9 +1,8 @@
 from typing import List, Optional
-
 from sqlalchemy import Boolean, Column, Date, DateTime, Enum, ForeignKeyConstraint, Index, Integer, Numeric, PrimaryKeyConstraint, Sequence, String, Text, UniqueConstraint, text
 from sqlalchemy.orm import Mapped, declarative_base, mapped_column, relationship
-from sqlalchemy.orm.base import Mapped
-from sqlalchemy_to_pydantic import sqlalchemy_to_pydantic
+#from sqlalchemy_to_pydantic import sqlalchemy_to_pydantic
+#from pydantic_sqlalchemy import sqlalchemy_to_pydantic
 
 Base = declarative_base()
 
@@ -572,4 +571,18 @@ class PublicSTPCustomFieldValues(Base):
     public_STPOrganization: Mapped['PublicSTPOrganization'] = relationship('PublicSTPOrganization', foreign_keys=[OrganizationId], back_populates='public_STPCustomFieldValues')
     public_STPOrganization_: Mapped[Optional['PublicSTPOrganization']] = relationship('PublicSTPOrganization', foreign_keys=[SubOrganizationId], back_populates='public_STPCustomFieldValues_')
 
-STPCustomFieldValues_Pydantic = sqlalchemy_to_pydantic(PublicSTPCustomFieldValues)
+
+# CustomFieldValues_Pydantic = sqlalchemy_to_pydantic(PublicSTPCustomFieldValues)
+# print(CustomFieldValues_Pydantic)
+#print(CustomFieldValues_Pydantic.model_json_schema())
+
+
+# with open("app/schemas/customfieldvaluespydantic.py", "w") as file:
+#     file.write(
+#         f"from pydantic import BaseModel\n"
+#         f"from datetime import datetime\n\n"
+#         f"class CustomFieldValues_Pydantic(BaseModel):\n"
+#     )
+
+#     for field, field_type in CustomFieldValues_Pydantic.__annotations__.items():
+#         file.write(f"    {field}: {field_type}\n")

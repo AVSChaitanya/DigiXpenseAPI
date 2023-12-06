@@ -513,7 +513,6 @@ class PublicSYSStorageProviders(Base):
     OrganizationId = mapped_column(Integer, nullable=False)
     RecId = mapped_column(Integer)
     ProviderName = mapped_column(String(220))
-    StorageProviderType = mapped_column(Enum('Cloud', 'Local', name='storageprovidertype'))
     APIEndpoint = mapped_column(String(220))
     EffectiveFrom = mapped_column(Date)
     EffectiveTo = mapped_column(Date)
@@ -524,6 +523,8 @@ class PublicSYSStorageProviders(Base):
     ModifiedBy = mapped_column(String(20))
     SubOrganizationId = mapped_column(Integer)
     ProviderId = mapped_column(String(20))
+    StorageProviderType = mapped_column(Enum('DataBase', 'Local Storage', 'AWS Storage', 'Azure Blob', name='storagetype'))
+    IsActive = mapped_column(Boolean, server_default=text('true'))
 
     public_SYSUsers: Mapped[Optional['PublicSYSUsers']] = relationship('PublicSYSUsers', foreign_keys=[CreatedBy], back_populates='public_SYSStorageProviders')
     public_SYSUsers_: Mapped[Optional['PublicSYSUsers']] = relationship('PublicSYSUsers', foreign_keys=[ModifiedBy], back_populates='public_SYSStorageProviders_')

@@ -4,7 +4,7 @@ import datetime
 
 import pytz
 
-from DigiXpenseAPI.app.core.conf import settings
+from app.core.conf import settings
 
 
 class TimeZoneUtils:

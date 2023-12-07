@@ -3,8 +3,8 @@
 import uvicorn
 from path import Path
 
-from DigiXpenseAPI.app.common.log import log
-from DigiXpenseAPI.app.core.conf import settings
+# from DigiXpenseAPI.app.common.log import log
+from DigiXpenseAPI.DigiXpenseAPI.app.core.conf import settings
 from DigiXpenseAPI.app.core.registrar import register_app
 
 app = register_app()

@@ -11,7 +11,7 @@ from sqlalchemy.ext.asyncio import AsyncEngine
 
 sys.path.append('../../')
 
-from app.core import path_conf  # noqa: E402
+from DigiXpenseAPI.DigiXpenseAPI.app.core import path_conf  # noqa: E402
 
 if not os.path.exists(path_conf.Versions):
     os.makedirs(path_conf.Versions)
@@ -31,7 +31,7 @@ from app.models.base import MappedBase  # noqa: E402
 target_metadata = MappedBase.metadata
 
 # other values from the config, defined by the needs of env.py,
-from app.database.db_psql import SQLALCHEMY_DATABASE_URL  # noqa: E402
+from DigiXpenseAPI.DigiXpenseAPI.app.database.db_psql import SQLALCHEMY_DATABASE_URL  # noqa: E402
 
 config.set_main_option('sqlalchemy.url', SQLALCHEMY_DATABASE_URL)
 

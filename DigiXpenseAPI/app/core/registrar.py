@@ -10,13 +10,13 @@ from starlette.middleware.authentication import AuthenticationMiddleware
 
 from app.api.routers import v1
 from app.common.exception.exception_handler import register_exception
-# from SocialAnalytics.app.common.redis import redis_client
-# from SocialAnalytics.app.common.task import scheduler
+from app.common.redis import redis_client
+from app.common.task import scheduler
 from app.core.conf import settings
 from app.database.db_psql import create_table
 from app.middleware.jwt_auth_middleware import JwtAuthMiddleware
 # from SocialAnalytics.app.middleware.opera_log_middleware import OperaLogMiddleware
-# from app.utils.demo_site import demo_site
+from app.utils.demo_site import demo_site
 from app.utils.health_check import ensure_unique_route_names, http_limit_callback
 from app.utils.openapi import simplify_operation_ids
 

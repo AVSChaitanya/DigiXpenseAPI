@@ -424,3 +424,9 @@ class WorkflowTrackingStatus(StrEnum):
     Approved = 'Approved'
     Rejected = 'Rejected'
     Completed = 'Completed'
+
+class BuildTreeType(StrEnum):
+    """Build tree structure type"""
+
+    traversal = 'traversal'
+    recursive = 'recursive'
